@@ -1,0 +1,29 @@
+cmake_minimum_required(VERSION 3.0.0)
+set(this DsAndAlgo)
+
+project(${this} VERSION 0.1.0)
+
+include(ctest)
+include(GoogleTest)
+enable_testing()
+
+set(Headers
+    LinkedList/Node.h
+    LinkedList/LinkedList.h
+    LinkedList/Doubly.h
+    LinkedList/Circular.h)
+
+set(Sources
+    LinkedList/LinkedList.cpp
+    LinkedList/Doubly.cpp
+    LinkedList/Circular.cpp)
+
+add_library(${this} ${Sources} ${Headers})
+target_compile_features(${this} PUBLIC cxx_std_20)
+
+add_subdirectory(googletest)
+add_subdirectory(DsAndAlgoTests)
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
