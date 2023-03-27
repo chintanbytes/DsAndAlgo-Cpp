@@ -11,6 +11,7 @@ class DoublyLinkedList
 {
 private:
     Node *head;
+    Node *tail;
 
 public:
     DoublyLinkedList(/* args */);
@@ -20,4 +21,7 @@ public:
     void AddLast(int item);
     void DeleteFirst();
     void DeleteLast();
+
+    Node *GetHead();
+    Node *GetTail();
 };

@@ -2,59 +2,73 @@
 
 CircularLinkedList::CircularLinkedList(/* args */)
 {
-    current = nullptr;
+    head = nullptr;
 }
 
 CircularLinkedList::~CircularLinkedList()
 {
 }
 
-void CircularLinkedList::AddBefore(int item)
+void CircularLinkedList::Add(int item)
 {
-    Node *temp = new Node();
+    auto temp = new Node();
     temp->Item = item;
 
-    if (current == nullptr)
+    //Empty
+    if (head == nullptr)
     {
-        current = temp;
-        current->Next = current;
-    }
-
-    temp->Next = current;
-    current->Next = temp;
-    current = temp;
-}
-void CircularLinkedList::AddAfter(int item)
-{
-    Node *temp = new Node();
-    temp->Item = item;
-
-    if (current == nullptr)
+        head = temp;
+        head->Next = head;
+    } //Single element
+    else if(head->Next == head)
     {
-        current = temp;
-        current->Next = current;
+       head->Next = temp;
+       temp->Next = head;
     }
+    else
+    {
+        auto current = head;
 
-    current->Next = temp;
-    temp->Next = current;
-    current = temp;
+        //find tail
+        while(current->Next != head){
+            current = current->Next;
+        }
+
+        //replace tail with temp
+        current->Next = temp;
+        temp->Next = head;
+    }
 }
+
 void CircularLinkedList::Delete()
 {
-    if (current == nullptr)
+    //Empty List
+    if (head == nullptr)
+    {
         return; // empty
-
+    }
     // single node
-    if (current == current->Next)
+    else if (head->Next == head)
     {
-        delete current;
-        current = nullptr;
+        delete head;
+        head = nullptr;
     }
+    else
+    {
+        auto current = head;
 
-    Node *temp = current;
-    while (temp->Next->Next != current)
-    {
-        temp = temp->Next;
-    }
-    temp->Next = current;
+        //find a node before tail
+        while(current->Next->Next != head){
+            current = current->Next;
+        }
+        
+        //replace tail current
+        delete current->Next;
+        current->Next = head;       
+    }    
+}
+
+Node *CircularLinkedList::GetHead()
+{
+    return this->head;
 }

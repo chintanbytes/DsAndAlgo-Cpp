@@ -43,6 +43,7 @@ int LinkedList::DeleteFirst()
     {
         delete head;
         head = nullptr;
+        tail = nullptr;
         return val;
     }
 
@@ -53,7 +54,7 @@ int LinkedList::DeleteFirst()
     return val;
 }
 
-int LinkedList::DeteleLast()
+int LinkedList::DeleteLast()
 {
     if (head == nullptr)
     {
@@ -66,6 +67,7 @@ int LinkedList::DeteleLast()
     {
         delete head;
         head = nullptr;
+        tail = nullptr;
         return val;
     }
 
@@ -95,4 +97,14 @@ void LinkedList::PrintList()
         cout << temp->Item << endl;
         temp = temp->Next;
     }
+}
+
+Node *LinkedList::GetHead()
+{
+    return head;;
+}
+
+Node *LinkedList::GetTail()
+{
+    return tail;
 }

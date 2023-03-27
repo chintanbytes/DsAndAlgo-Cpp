@@ -12,6 +12,8 @@ public:
     ~LinkedList();
     void AddNode(int value);
     int DeleteFirst();
-    int DeteleLast();
+    int DeleteLast();
     void PrintList();
+    Node* GetHead();
+    Node* GetTail();
 };

@@ -21,8 +21,8 @@ set(Sources
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)
 
-add_subdirectory(googletest)
 add_subdirectory(DsAndAlgoTests)
+add_subdirectory(googletest)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

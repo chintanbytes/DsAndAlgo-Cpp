@@ -3,12 +3,12 @@
 class CircularLinkedList
 {
 private:
-    Node *current;
+    Node *head;
 
 public:
     CircularLinkedList(/* args */);
     ~CircularLinkedList();
-    void AddBefore(int item);
-    void AddAfter(int item);
+    void Add(int item);
     void Delete();
+    Node* GetHead();
 };

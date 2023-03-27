@@ -3,6 +3,7 @@
 DoublyLinkedList::DoublyLinkedList(/* args */)
 {
     head = nullptr;
+    tail = nullptr;
 }
 
 DoublyLinkedList::~DoublyLinkedList()
@@ -11,7 +12,6 @@ DoublyLinkedList::~DoublyLinkedList()
 
 void DoublyLinkedList::AddFirst(int item)
 {
-
     Node *temp = new Node();
     temp->Item = item;
     // Empty
@@ -20,72 +20,91 @@ void DoublyLinkedList::AddFirst(int item)
         head = temp;
         head->Next = nullptr;
         head->Previous = nullptr;
+        tail = head;
     }
-
-    temp->Next = head;
-    temp->Previous = nullptr;
-    head->Previous = temp;
-    head = temp;
+    else
+    {
+        auto currentHead = head;
+        head = temp;
+        head->Next = currentHead;
+        head->Previous = nullptr;
+        currentHead->Previous = head;
+    }
 }
 
 void DoublyLinkedList::AddLast(int item)
 {
+    Node *temp = new Node();
+    temp->Item = item;
+
+    // Empty List
     if (head == nullptr)
     {
-        head = new Node();
-        head->Item = item;
+        head = temp;
         head->Next = nullptr;
         head->Previous = nullptr;
+        tail = head;
     }
-
-    Node *current = head;
-    while (current->Next != nullptr)
+    else
     {
-        current = current->Next;
+        auto currentTail = tail;
+        tail = temp;
+        tail->Next = nullptr;
+        tail->Previous = currentTail;
+        currentTail->Next = tail;
     }
-    current->Next = new Node();
-    current->Next->Item = item;
-    current->Next->Next = nullptr;
-    current->Next->Previous = current;
 }
 
 void DoublyLinkedList::DeleteFirst()
 {
     if (head == nullptr)
+    {
         return; // empty
-
-    // Single node
-    int ret = head->Item;
-    if (head->Next == nullptr)
+    }
+    else if (head == tail)
     {
         delete head;
         head = nullptr;
+        tail = nullptr;
     }
     else
     {
+        auto currentHead = head;
         head = head->Next;
-        delete head->Previous;
         head->Previous = nullptr;
+        delete currentHead;
+        currentHead = nullptr;
     }
 }
 
 void DoublyLinkedList::DeleteLast()
 {
     if (head == nullptr)
-        return; // empty
-
-    // Single node
-    if (head->Next == nullptr)
+    {
+        return; // empty list
+    }
+    else if (head == tail)
     {
         delete head;
         head = nullptr;
+        tail = nullptr;
     }
-
-    Node *current = head;
-    while (current->Next->Next != nullptr)
+    else
     {
-        current = current->Next;
+        auto currentTail = tail;
+        tail = currentTail->Previous;
+        tail->Next = nullptr;
+        delete currentTail;
+        currentTail = nullptr;
     }
-    delete current->Next;
-    current->Next = nullptr;
+}
+
+Node *DoublyLinkedList::GetHead()
+{
+    return this->head;
+}
+
+Node *DoublyLinkedList::GetTail()
+{
+    return this->tail;
 }
