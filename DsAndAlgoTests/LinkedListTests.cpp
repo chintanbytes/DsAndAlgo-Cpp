@@ -2,42 +2,48 @@
 #include "../LinkedList/LinkedList.h"
 
 using namespace std;
-struct LinkedListTests:public testing::Test 
+struct LinkedListTests : public testing::Test
 {
-    LinkedList* list;
+    LinkedList *list;
 
-    virtual void SetUp() override { 
+    virtual void SetUp() override
+    {
         cout << "Setting up test fixture" << endl;
         list = new LinkedList();
     }
 
-    virtual void TearDown() override{
+    virtual void TearDown() override
+    {
         cout << "Cleaning up after tests" << endl;
         delete list;
     }
 
-    void Add(int val){
+    void Add(int val)
+    {
         list->AddNode(val);
     }
 
-    int DeleteFirst(){
+    int DeleteFirst()
+    {
         return list->DeleteFirst();
     }
-    
-    int DeleteLast(){
+
+    int DeleteLast()
+    {
         return list->DeleteLast();
     }
 };
 
+TEST_F(LinkedListTests, After_First_Add_Head_Eq_Tail)
+{
 
-TEST_F(LinkedListTests, After_First_Add_Head_Eq_Tail){
-    
     Add(100);
     EXPECT_EQ(list->GetHead(), list->GetTail());
     EXPECT_EQ(list->GetHead()->Item, list->GetTail()->Item);
 };
 
-TEST_F(LinkedListTests, After_Second_Add_Head_Not_Eq_Tail){
+TEST_F(LinkedListTests, After_Second_Add_Head_Not_Eq_Tail)
+{
     Add(100);
     Add(100);
     EXPECT_FALSE(list->GetHead() == list->GetTail());
@@ -45,18 +51,19 @@ TEST_F(LinkedListTests, After_Second_Add_Head_Not_Eq_Tail){
     EXPECT_EQ(list->GetTail()->Next, nullptr);
 };
 
-TEST_F(LinkedListTests, Can_Not_Delete_From_Empty_List){
-   
-    EXPECT_EQ (DeleteFirst(), 0);
+TEST_F(LinkedListTests, Can_Not_Delete_From_Empty_List)
+{
+
+    EXPECT_EQ(DeleteFirst(), 0);
 };
 
-TEST_F(LinkedListTests, Test_Delete_First_Last_Empty){
-   
-    
+TEST_F(LinkedListTests, Test_Delete_First_Last_Empty)
+{
+
     Add(100);
     EXPECT_EQ(list->GetHead(), list->GetTail());
     EXPECT_EQ(list->GetHead()->Item, 100);
-    
+
     Add(200);
     EXPECT_EQ(list->GetTail()->Item, 200);
 
@@ -75,4 +82,17 @@ TEST_F(LinkedListTests, Test_Delete_First_Last_Empty){
     EXPECT_EQ(var, 200) << "Value = " << var;
     EXPECT_EQ(list->GetHead(), nullptr);
     EXPECT_EQ(list->GetTail(), nullptr);
+};
+
+TEST_F(LinkedListTests, Length_Matches)
+{
+    Add(100);
+    EXPECT_EQ(list->GetLength(), 1);
+    Add(100);
+    EXPECT_EQ(list->GetLength(), 2);
+
+    EXPECT_EQ(DeleteFirst(), 100);
+    EXPECT_EQ(list->GetLength(), 1);
+    EXPECT_EQ(DeleteLast(), 100);
+    EXPECT_EQ(list->GetLength(), 0);
 };

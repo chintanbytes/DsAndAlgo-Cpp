@@ -14,6 +14,9 @@ public:
     int DeleteFirst();
     int DeleteLast();
     void PrintList();
-    Node* GetHead();
-    Node* GetTail();
+    Node *GetHead();
+    Node *GetTail();
+    int GetLength();
+    void InsertAtIth(int value, int position);
+    bool SearchList(Node *head, int item);
 };

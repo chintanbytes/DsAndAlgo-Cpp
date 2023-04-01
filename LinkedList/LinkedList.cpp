@@ -101,10 +101,72 @@ void LinkedList::PrintList()
 
 Node *LinkedList::GetHead()
 {
-    return head;;
+    return head;
+    ;
 }
 
 Node *LinkedList::GetTail()
 {
     return tail;
+}
+
+int LinkedList::GetLength()
+{
+    auto length = 0;
+    auto temp = this->GetHead();
+    while (temp != nullptr)
+    {
+        length += 1;
+        temp = temp->Next;
+    }
+    return length;
+}
+
+// length recursive takes head as param
+//  if(head  == null)
+//      return 0;
+// return 1 + recucall(head->next);
+
+void LinkedList::InsertAtIth(int value, int position)
+{
+    if (position < 0)
+    {
+        cout << "Cannot insert at " << position << endl;
+        return;
+    }
+
+    auto node = new Node();
+    node->Item = value;
+
+    if (position == 0)
+    {
+        node->Next = head;
+        head = node;
+        return;
+    }
+
+    int count = 0;
+    auto temp = head;
+
+    while (count < position - 1 && temp != nullptr)
+    {
+        temp = temp->Next;
+        count++;
+    }
+
+    if (temp != nullptr)
+    {
+        node->Next = temp->Next;
+        temp->Next = node;
+    }
+}
+
+bool LinkedList::SearchList(Node *head, int item)
+{
+    if (head == nullptr)
+        return false;
+    if (head != nullptr && head->Item == item)
+        return true;
+
+    return SearchList(head->Next, item);
 }
