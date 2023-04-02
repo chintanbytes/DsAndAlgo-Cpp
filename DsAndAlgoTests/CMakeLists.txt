@@ -5,6 +5,8 @@ set(Sources
     LinkedListTests.cpp
     DoublyLinkedListTests.cpp
     CircularLinkedListTests.cpp
+    SortingTests.cpp
+    SearchingTests.cpp
 )
 
 project(${this})
