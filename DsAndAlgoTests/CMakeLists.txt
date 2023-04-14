@@ -7,6 +7,7 @@ set(Sources
     CircularLinkedListTests.cpp
     SortingTests.cpp
     SearchingTests.cpp
+    RecursionTests.cpp
 )
 
 project(${this})

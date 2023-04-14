@@ -18,7 +18,8 @@ set(Sources
     LinkedList/Doubly.cpp
     LinkedList/Circular.cpp
     Sorting/Sorting.cpp
-    Searching/Searching.cpp)
+    Searching/Searching.cpp
+    Recursion/Recursion.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)
