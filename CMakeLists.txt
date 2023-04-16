@@ -19,7 +19,9 @@ set(Sources
     LinkedList/Circular.cpp
     Sorting/Sorting.cpp
     Searching/Searching.cpp
-    Recursion/Recursion.cpp)
+    Recursion/Recursion.cpp
+    Stacks.cpp
+    Queues.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)
