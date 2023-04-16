@@ -12,7 +12,7 @@ DoublyLinkedList::~DoublyLinkedList()
 
 void DoublyLinkedList::AddFirst(int item)
 {
-    Node *temp = new Node();
+    DoublyLinkedListNode *temp = new DoublyLinkedListNode();
     temp->Item = item;
     // Empty
     if (head == nullptr)
@@ -34,7 +34,7 @@ void DoublyLinkedList::AddFirst(int item)
 
 void DoublyLinkedList::AddLast(int item)
 {
-    Node *temp = new Node();
+    DoublyLinkedListNode *temp = new DoublyLinkedListNode();
     temp->Item = item;
 
     // Empty List
@@ -99,12 +99,12 @@ void DoublyLinkedList::DeleteLast()
     }
 }
 
-Node *DoublyLinkedList::GetHead()
+DoublyLinkedListNode *DoublyLinkedList::GetHead()
 {
     return this->head;
 }
 
-Node *DoublyLinkedList::GetTail()
+DoublyLinkedListNode *DoublyLinkedList::GetTail()
 {
     return this->tail;
 }

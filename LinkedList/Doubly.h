@@ -1,17 +1,17 @@
-class Node
+class DoublyLinkedListNode
 {
 private:
 public:
     int Item;
-    Node *Next;
-    Node *Previous;
+    DoublyLinkedListNode *Next;
+    DoublyLinkedListNode *Previous;
 };
 
 class DoublyLinkedList
 {
 private:
-    Node *head;
-    Node *tail;
+    DoublyLinkedListNode *head;
+    DoublyLinkedListNode *tail;
 
 public:
     DoublyLinkedList(/* args */);
@@ -22,6 +22,6 @@ public:
     void DeleteFirst();
     void DeleteLast();
 
-    Node *GetHead();
-    Node *GetTail();
+    DoublyLinkedListNode *GetHead();
+    DoublyLinkedListNode *GetTail();
 };

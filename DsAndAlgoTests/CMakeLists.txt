@@ -9,6 +9,7 @@ set(Sources
     SearchingTests.cpp
     RecursionTests.cpp
     StacksTests.cpp
+    QueueTests.cpp
 )
 
 project(${this})
