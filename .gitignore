@@ -1,2 +1,7 @@
 build
 build/*
+BuiltInDs.exe
+BuiltInDs.ilk
+BuiltInDs.obj
+BuiltInDs.pdb
+vc140.pdb
