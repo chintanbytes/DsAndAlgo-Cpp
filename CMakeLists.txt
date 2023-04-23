@@ -20,8 +20,11 @@ set(Sources
     Sorting/Sorting.cpp
     Searching/Searching.cpp
     Recursion/Recursion.cpp
-    Stacks.cpp
-    Queues.cpp)
+    Stack/Stacks.cpp
+    Queue/Queues.cpp
+    Tree/TreeNode.cpp
+    Tree/Tree.cpp
+    CppBasic/BuiltIns.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)

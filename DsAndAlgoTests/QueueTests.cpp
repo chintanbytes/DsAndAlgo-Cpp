@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "..\Queues.cpp"
+#include "..\Queue\Queues.cpp"
 
 TEST(QueueTests, TEST_ENQUEUE)
 {

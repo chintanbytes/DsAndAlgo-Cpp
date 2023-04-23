@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./LinkedList/Node.h"
+#include "./../LinkedList/Node.h"
 
 using namespace std;
 class Queues

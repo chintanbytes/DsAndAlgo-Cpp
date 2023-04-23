@@ -67,7 +67,7 @@ bool Stack<T>::IsEmpty()
     return top == -1;
 }
 
-#include "LinkedList/Node.h";
+#include "./../LinkedList/Node.h";
 class LinkedListStack
 {
 private:

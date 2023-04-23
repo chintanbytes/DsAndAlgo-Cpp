@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "..\Stacks.cpp"
+#include "..\Stack\Stacks.cpp"
 
 TEST(StacksTests, TEST_PUSH)
 {
