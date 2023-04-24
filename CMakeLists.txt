@@ -14,6 +14,7 @@ set(Headers
     LinkedList/Circular.h)
 
 set(Sources
+    CppBasic/BuiltIns.cpp    
     LinkedList/LinkedList.cpp
     LinkedList/Doubly.cpp
     LinkedList/Circular.cpp
@@ -24,7 +25,8 @@ set(Sources
     Queue/Queues.cpp
     Tree/TreeNode.cpp
     Tree/Tree.cpp
-    CppBasic/BuiltIns.cpp)
+    Tree/BinaryTreeNode.cpp
+    Tree/BinaryTree.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)
