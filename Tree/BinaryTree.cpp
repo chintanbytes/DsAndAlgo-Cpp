@@ -15,6 +15,8 @@ private:
     void PostOrder(BinaryTreeNode<T> *node);
     void LevelOrder();
     int Count(BinaryTreeNode<T> *node);
+    int Height(BinaryTreeNode<T> *node);
+    bool Symmetric(BinaryTreeNode<T> *left, BinaryTreeNode<T> *right);
 
 public:
     BinaryTree();
@@ -22,6 +24,12 @@ public:
     void Build();
     void Travers();
     int CountNodes();
+    int TreeHeight();
+    int IsSymmetric();
+    BinaryTreeNode<T> *GetRoot();
+    void FindMin(BinaryTreeNode<T> *node, int &min);
+    void FindMax(BinaryTreeNode<T> *node, int &max);
+    int CountLeafNode(BinaryTreeNode<T> *node);
 };
 
 template <typename T>
@@ -77,6 +85,60 @@ template <typename T>
 int BinaryTree<T>::CountNodes()
 {
     return Count(root);
+}
+
+template <typename T>
+int BinaryTree<T>::TreeHeight()
+{
+    return Height(root);
+}
+
+template <typename T>
+int BinaryTree<T>::IsSymmetric()
+{
+    if (root == nullptr)
+        return true;
+
+    return Symmetric(root->left, root->right);
+}
+
+template <typename T>
+BinaryTreeNode<T> *BinaryTree<T>::GetRoot()
+{
+    return root;
+}
+
+template <typename T>
+void BinaryTree<T>::FindMin(BinaryTreeNode<T> *node, int &min)
+{
+    if (node == nullptr)
+        return;
+
+    min = std::min(node->data, min);
+    FindMin(node->left, min);
+    FindMin(node->right, min);
+}
+
+template <typename T>
+void BinaryTree<T>::FindMax(BinaryTreeNode<T> *node, int &max)
+{
+    if (node == nullptr)
+        return;
+
+    max = std::max(node->data, max);
+    FindMax(node->left, max);
+    FindMax(node->right, max);
+}
+
+template <typename T>
+int BinaryTree<T>::CountLeafNode(BinaryTreeNode<T> *node)
+{
+    if (node == nullptr)
+        return 0;
+    if (node->left == nullptr && node->right == nullptr)
+        return 1;
+
+    return CountLeafNode(node->left) + CountLeafNode(node->right);
 }
 
 template <typename T>
@@ -236,6 +298,34 @@ int BinaryTree<T>::Count(BinaryTreeNode<T> *node)
         return 0;
 
     return Count(node->left) + Count(node->right) + 1;
+}
+
+template <typename T>
+int BinaryTree<T>::Height(BinaryTreeNode<T> *node)
+{
+    auto height = 0;
+    if (node == nullptr)
+        return 0;
+
+    auto leftHeight = Height(node->left);
+    auto rightHeight = Height(node->right);
+
+    return std::max(leftHeight, rightHeight) + 1;
+}
+
+template <typename T>
+bool BinaryTree<T>::Symmetric(BinaryTreeNode<T> *left, BinaryTreeNode<T> *right)
+{
+    if (left == nullptr && right != nullptr)
+        return false;
+    else if (left != nullptr && right == nullptr)
+        return false;
+    else if (left == nullptr && right == nullptr)
+        return true;
+    else if (left->data != right->data)
+        return false;
+
+    return Symmetric(left->left, right->right) && Symmetric(left->right, right->left);
 }
 
 // int main(int argc, char const *argv[])

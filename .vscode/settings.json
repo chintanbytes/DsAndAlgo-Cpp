@@ -3,6 +3,11 @@
     "editor.mouseWheelZoom": true,
     "editor.formatOnSave": true,
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "algorithm": "cpp",
+        "chrono": "cpp",
+        "memory": "cpp",
+        "limits": "cpp",
+        "utility": "cpp"
     }
 }

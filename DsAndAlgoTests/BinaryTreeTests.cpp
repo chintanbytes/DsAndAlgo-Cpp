@@ -25,4 +25,9 @@ TEST_F(BinaryTreeTests, Test_Build_Simple)
     tree->Travers();
     auto count = tree->CountNodes();
     EXPECT_EQ(3, count);
+    auto MaxDepth = tree->TreeHeight();
+    EXPECT_EQ(2, MaxDepth);
+
+    auto isSymmetric = tree->IsSymmetric();
+    EXPECT_TRUE(isSymmetric);
 }
