@@ -23,4 +23,6 @@ TEST_F(BinaryTreeTests, Test_Build_Simple)
 {
     tree->Build();
     tree->Travers();
+    auto count = tree->CountNodes();
+    EXPECT_EQ(3, count);
 }

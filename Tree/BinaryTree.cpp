@@ -14,12 +14,14 @@ private:
     void InOrder(BinaryTreeNode<T> *node);
     void PostOrder(BinaryTreeNode<T> *node);
     void LevelOrder();
+    int Count(BinaryTreeNode<T> *node);
 
 public:
     BinaryTree();
     ~BinaryTree();
     void Build();
     void Travers();
+    int CountNodes();
 };
 
 template <typename T>
@@ -69,6 +71,12 @@ void BinaryTree<T>::Travers()
 
     std::cout << "Level Order: ";
     LevelOrder();
+}
+
+template <typename T>
+int BinaryTree<T>::CountNodes()
+{
+    return Count(root);
 }
 
 template <typename T>
@@ -220,3 +228,20 @@ void BinaryTree<T>::LevelOrder()
 
     std::cout << std::endl;
 }
+
+template <typename T>
+int BinaryTree<T>::Count(BinaryTreeNode<T> *node)
+{
+    if (node == nullptr)
+        return 0;
+
+    return Count(node->left) + Count(node->right) + 1;
+}
+
+// int main(int argc, char const *argv[])
+// {
+//     auto tree = new BinaryTree<int>();
+//     tree->Build();
+//     tree->Travers();
+//     auto count = tree->CountNodes();
+// }
