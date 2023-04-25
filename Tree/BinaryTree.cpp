@@ -17,6 +17,9 @@ private:
     int Count(BinaryTreeNode<T> *node);
     int Height(BinaryTreeNode<T> *node);
     bool Symmetric(BinaryTreeNode<T> *left, BinaryTreeNode<T> *right);
+    BinaryTreeNode<T> *InPreHelper(std::vector<T> &inOrder, std::vector<T> &preOrder, int inS, int inE, int preS, int preE);
+    BinaryTreeNode<T> *InPostHelper(std::vector<T> &inOrder, std::vector<T> &postOrder, int inS, int inE, int postS, int postE);
+    std::pair<int, int> HeightDiameter(BinaryTreeNode<T> *node);
 
 public:
     BinaryTree();
@@ -30,6 +33,10 @@ public:
     void FindMin(BinaryTreeNode<T> *node, int &min);
     void FindMax(BinaryTreeNode<T> *node, int &max);
     int CountLeafNode(BinaryTreeNode<T> *node);
+    BinaryTreeNode<T> *BuildTreeUsingInPre(std::vector<T> &inOrder, std::vector<T> &preOrder);
+    BinaryTreeNode<T> *BuildTreeUsingInPost(std::vector<T> &inOrder, std::vector<T> &postOrder);
+    int Diameter(BinaryTreeNode<T> *node);
+    int DiameterBetter(BinaryTreeNode<T> *node);
 };
 
 template <typename T>
@@ -326,6 +333,136 @@ bool BinaryTree<T>::Symmetric(BinaryTreeNode<T> *left, BinaryTreeNode<T> *right)
         return false;
 
     return Symmetric(left->left, right->right) && Symmetric(left->right, right->left);
+}
+
+template <typename T>
+BinaryTreeNode<T> *BinaryTree<T>::InPreHelper(std::vector<T> &inOrder, std::vector<T> &preOrder, int InS, int InE, int preS, int preE)
+{
+    if (InE < InS)
+        return nullptr;
+
+    auto rootData = preOrder[preS];
+    auto rootNode = new BinaryTreeNode(rootData);
+    if (root == nullptr)
+        root = rootNode;
+
+    int rootIndex = -1;
+    for (int i = InS; i <= InE; i++)
+    {
+        if (inOrder[i] == rootData)
+        {
+            rootIndex = i;
+            break;
+        }
+    }
+
+    int leftInStart = InS;
+    int leftInEnd = rootIndex - 1;
+    int leftPreStart = preS + 1;
+    int leftPreEnd = leftPreStart + leftInEnd - leftInStart;
+
+    int rightInStart = rootIndex + 1;
+    int rightInEnd = InE;
+    int rightPreStart = leftPreEnd + 1;
+    int rightPreEnd = preE;
+
+    rootNode->left = InPreHelper(inOrder, preOrder, leftInStart, leftInEnd, leftPreStart, leftPreEnd);
+    rootNode->right = InPreHelper(inOrder, preOrder, rightInStart, rightInEnd, rightPreStart, rightPreEnd);
+
+    return rootNode;
+}
+
+template <typename T>
+BinaryTreeNode<T> *BinaryTree<T>::InPostHelper(std::vector<T> &inOrder, std::vector<T> &postOrder, int inS, int inE, int postS, int postE)
+{
+    if (inE < inS)
+        return nullptr;
+
+    auto rootData = postOrder[postE];
+    auto rootNode = new BinaryTreeNode(rootData);
+    if (root == nullptr)
+        root = rootNode;
+
+    int rootIndex = -1;
+    for (int i = inS; i <= inE; i++)
+    {
+        if (inOrder[i] == rootData)
+        {
+            rootIndex = i;
+            break;
+        }
+    }
+
+    int leftInStart = inS;
+    int leftInEnd = rootIndex - 1;
+    int leftPostStart = postS;
+    int leftPostEnd = leftPostStart + leftInEnd - leftInStart;
+
+    int rightInStart = rootIndex + 1;
+    int rightInEnd = inE;
+    int rightPostStart = leftPostEnd + 1;
+    int rightPostEnd = postE - 1;
+
+    rootNode->left = InPreHelper(inOrder, postOrder, leftInStart, leftInEnd, leftPostStart, leftPostEnd);
+    rootNode->right = InPreHelper(inOrder, postOrder, rightInStart, rightInEnd, rightPostStart, rightPostEnd);
+
+    return rootNode;
+}
+
+template <typename T>
+BinaryTreeNode<T> *BinaryTree<T>::BuildTreeUsingInPre(std::vector<T> &inOrder, std::vector<T> &preOrder)
+{
+    int n = inOrder.size();
+    return InPreHelper(inOrder, preOrder, 0, n - 1, 0, n - 1);
+}
+
+template <typename T>
+BinaryTreeNode<T> *BinaryTree<T>::BuildTreeUsingInPost(std::vector<T> &inOrder, std::vector<T> &postOrder)
+{
+    int n = inOrder.size();
+    return InPreHelper(inOrder, postOrder, 0, n - 1, 0, n - 1);
+}
+
+template <typename T>
+int BinaryTree<T>::Diameter(BinaryTreeNode<T> *node)
+{
+    if (node == nullptr)
+        return 0;
+
+    int option1 = Height(node->left) + Height(node->right);
+    int option2 = Diameter(node->left);
+    int option3 = Diameter(node->right);
+
+    return std::max(option1, std::max(option2, option3));
+}
+
+template <typename T>
+std::pair<int, int> BinaryTree<T>::HeightDiameter(BinaryTreeNode<T> *node)
+{
+    if (node == nullptr)
+    {
+        return {(0, 0)};
+    }
+
+    auto lefthd = HeightDiameter(node->left);
+    auto righthd = HeightDiameter(node->right);
+
+    int rh = righthd.first;
+    int lh = lefthd.first;
+    int rd = righthd.second;
+    int ld = lefthd.second;
+
+    auto ht = 1 + std::max(rh, lh);
+    auto dia = std::max(rh + lh, std::max(ld, rd));
+
+    return {(ht, dia)};
+}
+
+template <typename T>
+int BinaryTree<T>::DiameterBetter(BinaryTreeNode<T> *node)
+{
+    auto pair = HeightDiameter(node);
+    return pair.second;
 }
 
 // int main(int argc, char const *argv[])
