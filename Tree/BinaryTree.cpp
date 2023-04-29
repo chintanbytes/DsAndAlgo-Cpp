@@ -464,11 +464,3 @@ int BinaryTree<T>::DiameterBetter(BinaryTreeNode<T> *node)
     auto pair = HeightDiameter(node);
     return pair.second;
 }
-
-// int main(int argc, char const *argv[])
-// {
-//     auto tree = new BinaryTree<int>();
-//     tree->Build();
-//     tree->Travers();
-//     auto count = tree->CountNodes();
-// }

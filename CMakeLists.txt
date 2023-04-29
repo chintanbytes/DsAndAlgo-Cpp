@@ -26,7 +26,8 @@ set(Sources
     Tree/TreeNode.cpp
     Tree/Tree.cpp
     Tree/BinaryTreeNode.cpp
-    Tree/BinaryTree.cpp)
+    Tree/BinaryTree.cpp
+    Tree/Bst.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)

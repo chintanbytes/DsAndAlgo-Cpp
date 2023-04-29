@@ -11,6 +11,7 @@ set(Sources
     StacksTests.cpp
     QueueTests.cpp
     BinaryTreeTests.cpp
+    BstTests.cpp
 )
 
 project(${this})
