@@ -28,7 +28,8 @@ set(Sources
     Tree/BinaryTreeNode.cpp
     Tree/BinaryTree.cpp
     Tree/Bst.cpp
-    Hashmaps/Hashmap.cpp)
+    Hashmaps/Hashmap.cpp
+    Queue/PriorityQueue.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)
