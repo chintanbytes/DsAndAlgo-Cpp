@@ -12,6 +12,7 @@ set(Sources
     QueueTests.cpp
     BinaryTreeTests.cpp
     BstTests.cpp
+    HashmapTests.cpp
 )
 
 project(${this})
