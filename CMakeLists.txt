@@ -30,7 +30,8 @@ set(Sources
     Tree/Bst.cpp
     Hashmaps/Hashmap.cpp
     Queue/PriorityQueue.cpp
-    DynamicProgramming/DynamicProgramming.cpp)
+    DynamicProgramming/DynamicProgramming.cpp
+    Graph/Graph.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)
