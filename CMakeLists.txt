@@ -29,7 +29,8 @@ set(Sources
     Tree/BinaryTree.cpp
     Tree/Bst.cpp
     Hashmaps/Hashmap.cpp
-    Queue/PriorityQueue.cpp)
+    Queue/PriorityQueue.cpp
+    DynamicProgramming/DynamicProgramming.cpp)
 
 add_library(${this} ${Sources} ${Headers})
 target_compile_features(${this} PUBLIC cxx_std_20)

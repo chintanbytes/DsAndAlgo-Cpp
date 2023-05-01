@@ -14,6 +14,7 @@ set(Sources
     BstTests.cpp
     HashmapTests.cpp
     PriorityQueueTests.cpp
+    DPTests.cpp
 )
 
 project(${this})
